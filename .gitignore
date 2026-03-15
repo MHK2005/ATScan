@@ -1,0 +1,15 @@
+Files/
+venv/
+myenv/
+.pytest_cache/
+__pycache__/
+.venv/
+.env
+*.ipynb_checkpoints
+*.ipynb
+*.csv
+*.bat
+*.ini
+*.xlsx
+*.log
+app.py
