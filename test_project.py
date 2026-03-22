@@ -1,5 +1,6 @@
+import os
 import pytest
-from project import extract_text, check_sections, score_resume
+from project import extract_text, check_sections, score_resume, build_resume
 
 
 STRONG_RESUME = """
@@ -85,4 +86,40 @@ def test_score_resume_high():
 def test_score_resume_low():
     result = score_resume(WEAK_RESUME)
     assert result["total_score"] <= 30
+
+
+# build_resume Tests
+
+def test_build_resume(tmp_path):
+    data = {
+        "name": "Jane Smith",
+        "email": "jane@example.com",
+        "phone": "+1-555-999-8888",
+        "summary": "Experienced professional with strong communication and teamwork skills.",
+        "skills": "Python, Excel, Leadership",
+        "experience": "Led a team of engineers at TechCorp\nDelivered key projects on time",
+        "education": "Bachelor of Science, MIT, 2022",
+    }
+    result = build_resume(data, output_dir=str(tmp_path))
+    assert result["score_result"]["total_score"] >= 70
+    assert os.path.isfile(result["filepath"])
+    assert result["filename"].endswith(".docx")
+
+
+def test_build_resume_injects_keywords(tmp_path):
+    data = {
+        "name": "Test User",
+        "email": "test@test.com",
+        "phone": "+1-555-000-0000",
+        "summary": "A professional.",
+        "skills": "",
+        "experience": "Did work at a company for several years",
+        "education": "University degree, 2020",
+    }
+    result = build_resume(data, output_dir=str(tmp_path))
+    text = extract_text(result["filepath"]).lower()
+    from constants import ATS_KEYWORDS
+    found = sum(1 for k in ATS_KEYWORDS if k in text)
+    assert found >= 5
+
 
