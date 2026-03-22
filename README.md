@@ -70,4 +70,4 @@ python project.py
 
 ## Download
 
-A prebuilt Windows `.exe` is available in [Releases](../../releases). Download and run `ATScan.exe`.
+A prebuilt Windows `.exe` is available in [Releases](../../releases). Download `ATScan.zip`, extract it, and run `ATScan.exe`.

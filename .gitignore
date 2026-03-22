@@ -1,3 +1,5 @@
+build/
+dist/
 files/
 venv/
 myenv/
@@ -12,4 +14,5 @@ __pycache__/
 *.ini
 *.xlsx
 *.log
+*.spec
 app.py
