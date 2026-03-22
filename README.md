@@ -1,4 +1,4 @@
-# ATScan — ATS Resume Analyzer & Builder
+# ATScan — Resume Analyzer & Builder
 
 ## What is ATScan?
 
